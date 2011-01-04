@@ -3,3 +3,4 @@ This is the 0.5.3 release of VPNC with some modifications:
 * Adds ability to answer XAuth questions with an external script
 * Adds cleanup routines that run in the event of an unexpected disconnection
 * Adds workaround for scenario where concentrator asks Xauth question as a password request. 
+* Adds Mihai Maties' patch for Dead Peer Detection (http://lists.unix-ag.uni-kl.de/pipermail/vpnc-devel/2010-December/003492.html)

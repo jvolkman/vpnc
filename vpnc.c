@@ -899,7 +899,9 @@ void dpd_ike(struct sa_block *s)
 		*/
 		s->ike.dpd_attempts = 6;
 		s->ike.dpd_sent = time(NULL);
+		s->ike.dpd_seqno = ntohl(s->ike.dpd_seqno);
 		++s->ike.dpd_seqno;
+		s->ike.dpd_seqno = htonl(s->ike.dpd_seqno);
 		send_dpd(s, 0, s->ike.dpd_seqno);
 	} else {
 		/* Our last dpd request has not yet been acked.  If it's been
@@ -1623,6 +1625,7 @@ static void do_phase1_am(const char *key_id, const char *shared_key, struct sa_b
 					if (s->ike.dpd_idle != 0) {
 						gcry_create_nonce(&s->ike.dpd_seqno, sizeof(s->ike.dpd_seqno));
 						s->ike.dpd_seqno &= 0x7FFFFFFF;
+            s->ike.dpd_seqno = htonl(s->ike.dpd_seqno);
 						s->ike.dpd_seqno_ack = s->ike.dpd_seqno;
 						s->ike.do_dpd = 1;
 						DEBUG(2, printf("peer is DPD capable (RFC3706)\n"));
