@@ -101,6 +101,9 @@ int tun_get_hwaddr(int fd, char *dev, uint8_t *hwaddr);
 
 /***************************************************************************/
 #if defined(__APPLE__)
+
+#include <Availability.h>
+
 #define HAVE_SA_LEN 1
 #define NEED_IPLEN_FIX 1
 
@@ -109,6 +112,11 @@ int tun_get_hwaddr(int fd, char *dev, uint8_t *hwaddr);
 #define HAVE_FGETLN    1
 #define HAVE_UNSETENV  1
 #define HAVE_SETENV    1
+
+#ifdef __MAC_10_7
+#define HAVE_GETLINE   1
+#endif
+
 #endif
 
 /***************************************************************************/
